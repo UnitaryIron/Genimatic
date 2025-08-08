@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genimatic - Generate Stunning AI Art</title>
+    <meta
+      name="description"
+      content="Create beautiful AI-generated images with simple text prompts. Powered by advanced AI technology."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="dark">
+    <header class="navbar">
+      <div class="navbar-container">
+        <div class="logo">
+          <span class="logo-icon"></span>
+          <h1>Genimatic</h1>
+        </div>
+        <nav class="nav-links">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#" class="nav-link">Gallery</a>
+          <a href="#" class="nav-link">Pricing</a>
+          <a href="#" class="nav-link">Docs</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="btn secondary" id="themeToggle">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="btn primary">Sign In</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="hero">
+        <div class="hero-content">
+          <h2>Transform Your Ideas into Stunning Visuals</h2>
+          <p class="subtitle">
+            Generate high-quality AI art with simple text prompts. No design
+            skills required.
+          </p>
+        </div>
+      </section>
+
+      <section class="generator-section">
+        <div class="generator-container">
+          <div class="prompt-input-container">
+            <div class="input-group">
+              <textarea
+                id="promptInput"
+                placeholder="Describe the image you want to generate... (e.g. 'A majestic lion in the savannah at sunset, hyper-realistic')"
+                rows="3"
+              ></textarea>
+              <div class="input-footer">
+                <div class="model-selector">
+                  <select id="modelSelect">
+                    <option value="realistic">Realistic Vision</option>
+                    <option value="anime">Anime Style</option>
+                    <option value="fantasy">Fantasy Art</option>
+                    <option value="concept">Concept Art</option>
+                  </select>
+                </div>
+                <div class="prompt-actions">
+                  <button class="btn small secondary">
+                    <i class="fas fa-magic"></i> Enhance Prompt
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button class="btn primary generate-btn" onclick="generateImage()">
+              <i class="fas fa-sparkles"></i> Generate
+            </button>
+          </div>
+
+          <div class="advanced-options">
+            <div class="options-header">
+              <h3>Advanced Options</h3>
+              <button class="btn small secondary toggle-options">
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+            <div class="options-content">
+              <div class="option-group">
+                <label for="width">Width</label>
+                <select id="width">
+                  <option value="512">512px</option>
+                  <option value="768" selected>768px</option>
+                  <option value="1024">1024px</option>
+                </select>
+              </div>
+              <div class="option-group">
+                <label for="height">Height</label>
+                <select id="height">
+                  <option value="512">512px</option>
+                  <option value="768" selected>768px</option>
+                  <option value="1024">1024px</option>
+                </select>
+              </div>
+              <div class="option-group">
+                <label for="steps">Steps</label>
+                <input type="range" id="steps" min="20" max="100" value="50" />
+                <span id="stepsValue">50</span>
+              </div>
+              <div class="option-group">
+                <label for="guidance">Guidance Scale</label>
+                <input type="range" id="guidance" min="1" max="20" value="7" />
+                <span id="guidanceValue">7</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="output-container">
+            <div class="output-placeholder" id="outputPlaceholder">
+              <i class="fas fa-image"></i>
+              <p>Your generated image will appear here</p>
+            </div>
+            <div id="imageContainer" class="image-container"></div>
+            <div
+              class="output-actions"
+              id="outputActions"
+              style="display: none"
+            >
+              <button class="btn secondary" onclick="downloadImage()">
+                <i class="fas fa-download"></i> Download
+              </button>
+              <button class="btn secondary" onclick="copyImageURL()">
+                <i class="fas fa-copy"></i> Copy URL
+              </button>
+              <button class="btn secondary" onclick="remixImage()">
+                <i class="fas fa-random"></i> Remix
+              </button>
+              <button class="btn secondary" onclick="upscaleImage()">
+                <i class="fas fa-expand"></i> Upscale
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="history-section">
+        <div class="section-header">
+          <h2><i class="fas fa-history"></i> Prompt History</h2>
+          <button class="btn small secondary" onclick="clearHistory()">
+            Clear All
+          </button>
+        </div>
+        <div class="history-container">
+          <ul id="historyList" class="history-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-logo">
+          <span class="logo-icon"></span>
+          <h3>Genimatic</h3>
+        </div>
+        <div class="footer-links">
+          <div class="link-group">
+            <h4>Product</h4>
+            <a href="#">Features</a>
+            <a href="#">Pricing</a>
+            <a href="#">API</a>
+            <a href="#">Integrations</a>
+          </div>
+          <div class="link-group">
+            <h4>Resources</h4>
+            <a href="#">Documentation</a>
+            <a href="#">Tutorials</a>
+            <a href="#">Community</a>
+            <a href="#">Blog</a>
+          </div>
+          <div class="link-group">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Careers</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Genimatic. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-discord"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
