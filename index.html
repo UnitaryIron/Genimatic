@@ -70,8 +70,8 @@
                   </select>
                 </div>
                 <div class="prompt-actions">
-                  <button class="btn small secondary">
-                    <i class="fas fa-magic"></i> Enhance Prompt
+                  <button class="btn small secondary" onclick="randomPrompt()">
+                    <i class="fa-solid fa-shuffle"></i>Random Prompt
                   </button>
                 </div>
               </div>
@@ -79,43 +79,6 @@
             <button class="btn primary generate-btn" onclick="generateImage()">
               <i class="fas fa-sparkles"></i> Generate
             </button>
-          </div>
-
-          <div class="advanced-options">
-            <div class="options-header">
-              <h3>Advanced Options</h3>
-              <button class="btn small secondary toggle-options">
-                <i class="fas fa-chevron-down"></i>
-              </button>
-            </div>
-            <div class="options-content">
-              <div class="option-group">
-                <label for="width">Width</label>
-                <select id="width">
-                  <option value="512">512px</option>
-                  <option value="768" selected>768px</option>
-                  <option value="1024">1024px</option>
-                </select>
-              </div>
-              <div class="option-group">
-                <label for="height">Height</label>
-                <select id="height">
-                  <option value="512">512px</option>
-                  <option value="768" selected>768px</option>
-                  <option value="1024">1024px</option>
-                </select>
-              </div>
-              <div class="option-group">
-                <label for="steps">Steps</label>
-                <input type="range" id="steps" min="20" max="100" value="50" />
-                <span id="stepsValue">50</span>
-              </div>
-              <div class="option-group">
-                <label for="guidance">Guidance Scale</label>
-                <input type="range" id="guidance" min="1" max="20" value="7" />
-                <span id="guidanceValue">7</span>
-              </div>
-            </div>
           </div>
 
           <div class="output-container">
@@ -155,6 +118,19 @@
         </div>
         <div class="history-container">
           <ul id="historyList" class="history-list"></ul>
+        </div>
+      </section>
+
+      <!-- Add this section below the history section in your HTML -->
+      <section class="gallery-section" id="gallerySection">
+        <div class="section-header">
+          <h2><i class="fas fa-images"></i> Your Gallery</h2>
+          <button class="btn small secondary" onclick="clearGallery()">
+            Clear Gallery
+          </button>
+        </div>
+        <div class="gallery-container" id="galleryContainer">
+          <!-- Images will be loaded here -->
         </div>
       </section>
     </main>
