@@ -2,106 +2,232 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Genimatic - Generate Stunning AI Art</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Genimatic - Generate Stunning AI Art from Text Prompts</title>
     <meta
       name="description"
-      content="Create beautiful AI-generated images with simple text prompts. Powered by advanced AI technology."
+      content="Create beautiful, high-quality AI-generated images with simple text prompts. Powered by advanced AI technology for artists, designers, and creators."
     />
+    <meta
+      name="keywords"
+      content="AI art generator, AI image generation, text to image, AI art, generate images, art from text prompts, Genimatic"
+    />
+    <meta name="author" content="Genimatic Team" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Genimatic - Generate Stunning AI Art from Text Prompts"
+    />
+    <meta
+      property="og:description"
+      content="Create beautiful, high-quality AI-generated images with simple text prompts. Powered by advanced AI technology."
+    />
+    <meta property="og:url" content="https://genimatic.vercel.app/" />
+    <meta property="og:site_name" content="Genimatic" />
+    <meta
+      property="og:image"
+      content="https://genimatic.vercel.app/og-image.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Genimatic - Generate Stunning AI Art from Text Prompts"
+    />
+    <meta
+      name="twitter:description"
+      content="Create beautiful, high-quality AI-generated images with simple text prompts. Powered by advanced AI technology."
+    />
+    <meta
+      name="twitter:image"
+      content="https://genimatic.vercel.app/twitter-image.jpg"
+    />
+    <meta name="twitter:site" content="@Genimatic" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Genimatic",
+        "url": "https://genimatic.vercel.app/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://genimatic.vercel.app/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
   </head>
   <body class="dark">
-    <header class="navbar">
+    <header class="navbar" role="banner">
       <div class="navbar-container">
-        <div class="logo">
+        <div class="logo" role="img" aria-label="Genimatic logo">
           <span class="logo-icon"></span>
           <h1>Genimatic</h1>
         </div>
-        <nav class="nav-links">
-          <a href="#" class="nav-link">Home</a>
-          <a href="#" class="nav-link">Gallery</a>
-          <a href="#" class="nav-link">Pricing</a>
-          <a href="#" class="nav-link">Docs</a>
+        <nav
+          class="nav-links"
+          role="navigation"
+          aria-label="Primary navigation"
+        >
+          <a href="https://genimatic.vercel.app/#" class="nav-link">Home</a>
+          <a
+            href="https://genimatic.vercel.app/#gallerySection"
+            class="nav-link"
+            >Gallery</a
+          >
+          <a href="https://genimatic.vercel.app/#pricing" class="nav-link"
+            >Pricing</a
+          >
+          <a href="https://genimatic.vercel.app/#docs" class="nav-link"
+            >Documentation</a
+          >
         </nav>
         <div class="nav-actions">
-          <button class="btn secondary" id="themeToggle">
+          <button
+            class="btn secondary"
+            id="themeToggle"
+            aria-label="Toggle dark and light theme"
+          >
             <i class="fas fa-moon"></i>
           </button>
-          <button class="btn primary">Sign In</button>
+          <button class="btn primary" aria-label="Sign in to Genimatic">
+            Sign In
+          </button>
         </div>
       </div>
     </header>
 
-    <main class="main-content">
-      <section class="hero">
+    <main class="main-content" role="main">
+      <section
+        class="hero"
+        aria-labelledby="hero-title"
+        aria-describedby="hero-subtitle"
+      >
         <div class="hero-content">
-          <h2>Transform Your Ideas into Stunning Visuals</h2>
-          <p class="subtitle">
+          <h2 id="hero-title">Transform Your Ideas into Stunning Visuals</h2>
+          <p class="subtitle" id="hero-subtitle">
             Generate high-quality AI art with simple text prompts. No design
             skills required.
           </p>
         </div>
       </section>
 
-      <section class="generator-section">
+      <section class="generator-section" aria-label="AI art image generator">
         <div class="generator-container">
-          <div class="prompt-input-container">
+          <form
+            class="prompt-input-container"
+            onsubmit="generateImage(); return false;"
+          >
             <div class="input-group">
+              <label for="promptInput" class="sr-only"
+                >Image description text prompt</label
+              >
               <textarea
                 id="promptInput"
                 placeholder="Describe the image you want to generate... (e.g. 'A majestic lion in the savannah at sunset, hyper-realistic')"
                 rows="3"
+                aria-required="true"
+                required
               ></textarea>
               <div class="input-footer">
                 <div class="model-selector">
-                  <select id="modelSelect">
+                  <label for="modelSelect" class="sr-only"
+                    >Select AI art style</label
+                  >
+                  <select id="modelSelect" aria-describedby="modelDescription">
                     <option value="realistic">Realistic Vision</option>
                     <option value="anime">Anime Style</option>
                     <option value="fantasy">Fantasy Art</option>
                     <option value="concept">Concept Art</option>
                   </select>
+                  <p id="modelDescription" class="sr-only">
+                    Choose the style of AI art to generate
+                  </p>
                 </div>
                 <div class="prompt-actions">
-                  <button class="btn small secondary" onclick="randomPrompt()">
-                    <i class="fa-solid fa-shuffle"></i>Random Prompt
+                  <button
+                    class="btn small secondary"
+                    type="button"
+                    onclick="randomPrompt()"
+                    aria-label="Generate a random text prompt"
+                  >
+                    <i class="fa-solid fa-shuffle"></i> Random Prompt
                   </button>
                 </div>
               </div>
             </div>
-            <button class="btn primary generate-btn" onclick="generateImage()">
+            <button
+              class="btn primary generate-btn"
+              type="submit"
+              aria-label="Generate AI art image from prompt"
+            >
               <i class="fas fa-sparkles"></i> Generate
             </button>
-          </div>
+          </form>
 
-          <div class="output-container">
-            <div class="output-placeholder" id="outputPlaceholder">
+          <div class="output-container" aria-live="polite" aria-atomic="true">
+            <div
+              class="output-placeholder"
+              id="outputPlaceholder"
+              role="region"
+              aria-label="Image generation placeholder"
+            >
               <i class="fas fa-image"></i>
               <p>Your generated image will appear here</p>
             </div>
-            <div id="imageContainer" class="image-container"></div>
+            <div
+              id="imageContainer"
+              class="image-container"
+              role="region"
+              aria-label="Generated image container"
+            ></div>
             <div
               class="output-actions"
               id="outputActions"
               style="display: none"
+              role="region"
+              aria-label="Image output actions"
             >
-              <button class="btn secondary" onclick="downloadImage()">
+              <button
+                class="btn secondary"
+                onclick="downloadImage()"
+                aria-label="Download generated image"
+              >
                 <i class="fas fa-download"></i> Download
               </button>
-              <button class="btn secondary" onclick="copyImageURL()">
+              <button
+                class="btn secondary"
+                onclick="copyImageURL()"
+                aria-label="Copy image URL"
+              >
                 <i class="fas fa-copy"></i> Copy URL
               </button>
-              <button class="btn secondary" onclick="remixImage()">
+              <button
+                class="btn secondary"
+                onclick="remixImage()"
+                aria-label="Remix image to generate a variation"
+              >
                 <i class="fas fa-random"></i> Remix
               </button>
-              <button class="btn secondary" onclick="upscaleImage()">
+              <button
+                class="btn secondary"
+                onclick="upscaleImage()"
+                aria-label="Upscale image for higher resolution"
+              >
                 <i class="fas fa-expand"></i> Upscale
               </button>
             </div>
@@ -109,10 +235,14 @@
         </div>
       </section>
 
-      <section class="history-section">
+      <section class="history-section" aria-label="Prompt generation history">
         <div class="section-header">
           <h2><i class="fas fa-history"></i> Prompt History</h2>
-          <button class="btn small secondary" onclick="clearHistory()">
+          <button
+            class="btn small secondary"
+            onclick="clearHistory()"
+            aria-label="Clear prompt history"
+          >
             Clear All
           </button>
         </div>
@@ -121,60 +251,127 @@
         </div>
       </section>
 
-      <!-- Add this section below the history section in your HTML -->
-      <section class="gallery-section" id="gallerySection">
+      <section
+        class="gallery-section"
+        id="gallerySection"
+        aria-label="User's generated image gallery"
+      >
         <div class="section-header">
           <h2><i class="fas fa-images"></i> Your Gallery</h2>
-          <button class="btn small secondary" onclick="clearGallery()">
+          <button
+            class="btn small secondary"
+            onclick="clearGallery()"
+            aria-label="Clear image gallery"
+          >
             Clear Gallery
           </button>
         </div>
-        <div class="gallery-container" id="galleryContainer">
+        <div class="gallery-container" id="galleryContainer" role="list">
           <!-- Images will be loaded here -->
         </div>
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
       <div class="footer-container">
-        <div class="footer-logo">
+        <div class="footer-logo" role="img" aria-label="Genimatic logo">
           <span class="logo-icon"></span>
           <h3>Genimatic</h3>
         </div>
-        <div class="footer-links">
-          <div class="link-group">
+        <nav class="footer-links" aria-label="Footer navigation">
+          <div class="link-group" role="list">
             <h4>Product</h4>
-            <a href="#">Features</a>
-            <a href="#">Pricing</a>
-            <a href="#">API</a>
-            <a href="#">Integrations</a>
+            <a href="https://genimatic.vercel.app/#features" role="listitem"
+              >Features</a
+            >
+            <a href="https://genimatic.vercel.app/#pricing" role="listitem"
+              >Pricing</a
+            >
+            <a href="https://genimatic.vercel.app/#api" role="listitem">API</a>
+            <a href="https://genimatic.vercel.app/#integrations" role="listitem"
+              >Integrations</a
+            >
           </div>
-          <div class="link-group">
+          <div class="link-group" role="list">
             <h4>Resources</h4>
-            <a href="#">Documentation</a>
-            <a href="#">Tutorials</a>
-            <a href="#">Community</a>
-            <a href="#">Blog</a>
+            <a href="https://genimatic.vercel.app/#docs" role="listitem"
+              >Documentation</a
+            >
+            <a href="https://genimatic.vercel.app/#tutorials" role="listitem"
+              >Tutorials</a
+            >
+            <a href="https://genimatic.vercel.app/#community" role="listitem"
+              >Community</a
+            >
+            <a href="https://genimatic.vercel.app/#blog" role="listitem"
+              >Blog</a
+            >
           </div>
-          <div class="link-group">
+          <div class="link-group" role="list">
             <h4>Company</h4>
-            <a href="#">About</a>
-            <a href="#">Careers</a>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
+            <a href="https://genimatic.vercel.app/#about" role="listitem"
+              >About</a
+            >
+            <a href="https://genimatic.vercel.app/#careers" role="listitem"
+              >Careers</a
+            >
+            <a href="https://genimatic.vercel.app/#privacy" role="listitem"
+              >Privacy</a
+            >
+            <a href="https://genimatic.vercel.app/#terms" role="listitem"
+              >Terms</a
+            >
           </div>
-        </div>
+        </nav>
       </div>
       <div class="footer-bottom">
         <p>© 2025 Genimatic. All rights reserved.</p>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-discord"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
+        <div class="social-links" role="list">
+          <a
+            href="https://twitter.com/Genimatic"
+            target="_blank"
+            rel="noopener noreferrer"
+            role="listitem"
+            aria-label="Genimatic on Twitter"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            href="https://discord.gg/yourserver"
+            target="_blank"
+            rel="noopener noreferrer"
+            role="listitem"
+            aria-label="Genimatic on Discord"
+          >
+            <i class="fab fa-discord"></i>
+          </a>
+          <a
+            href="https://instagram.com/Genimatic"
+            target="_blank"
+            rel="noopener noreferrer"
+            role="listitem"
+            aria-label="Genimatic on Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
         </div>
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+
+    <style>
+      .sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
+    </style>
   </body>
 </html>
