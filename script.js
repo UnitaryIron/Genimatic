@@ -43,10 +43,7 @@ function generateImage() {
   document.getElementById('imageContainer').innerHTML = '';
   document.getElementById('outputActions').style.display = 'none';
   
-  // Simulate API call with timeout (in a real app, you would call your AI API here)
   setTimeout(() => {
-    // This is just a simulation - in reality you'd get the image URL from your AI service
-    // Use Pollinations API
 const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
 
 const img = new Image();
@@ -61,17 +58,17 @@ img.onload = () => {
 };
 
 img.onerror = () => {
-  outputPlaceholder.innerHTML = '<p>⚠️ Failed to generate image. Try again.</p>';
+  outputPlaceholder.innerHTML = '<p>Failed to generate image. Try again.</p>';
 };
 
     
     // Save to history
-    addToHistory(prompt, mockImageUrl);
+    addToHistory(prompt, imageUrl);
   }, 2000);
 }
 
 function addToHistory(prompt, imageUrl) {
-  let history = JSON.parse(localStorage.getItem('snappromptHistory')) || [];
+  let history = JSON.parse(localStorage.getItem('genimaticHistory')) || [];
   history.unshift({ prompt, imageUrl, date: new Date().toISOString() });
   if (history.length > 20) history = history.slice(0, 20);
   localStorage.setItem('snappromptHistory', JSON.stringify(history));
@@ -79,7 +76,7 @@ function addToHistory(prompt, imageUrl) {
 }
 
 function loadHistory() {
-  const history = JSON.parse(localStorage.getItem('snappromptHistory')) || [];
+  const history = JSON.parse(localStorage.getItem('genimaticHistory')) || [];
   const historyList = document.getElementById('historyList');
   historyList.innerHTML = '';
   
@@ -95,7 +92,7 @@ function loadHistory() {
 
 function clearHistory() {
   if (confirm('Are you sure you want to clear your prompt history?')) {
-    localStorage.removeItem('snappromptHistory');
+    localStorage.removeItem('genimaticHistory');
     loadHistory();
   }
 }
@@ -110,7 +107,7 @@ function downloadImage() {
   // Create a temporary link
   const link = document.createElement('a');
   link.href = img.src;
-  link.download = `snapprompt-${Date.now()}.jpg`;
+  link.download = `genimatic-${Date.now()}.jpg`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -136,6 +133,53 @@ function remixImage() {
   }
 }
 
-function upscaleImage() {
-  alert('Upscaling feature would call your AI upscaling API in a real implementation');
+async function upscaleImage() {
+  const img = document.querySelector('#imageContainer img');
+  if (!img) {
+    alert('No image to upscale');
+    return;
+  }
+
+  // Show loading state
+  const outputPlaceholder = document.getElementById('outputPlaceholder');
+  outputPlaceholder.innerHTML = '<i class="fas fa-spinner fa-spin"></i><p>Upscaling your image (2x)...</p>';
+  outputPlaceholder.style.display = 'flex';
+  document.getElementById('outputActions').style.display = 'none';
+
+  try {
+    // Convert image to blob for upload
+    const response = await fetch(img.src);
+    const blob = await response.blob();
+
+    const apiUrl = 'https://api.realesrgan.ai/upscale';
+    const formData = new FormData();
+    formData.append('image', blob);
+    formData.append('scale', '2'); // 2x upscaling
+
+    const upscaleResponse = await fetch(apiUrl, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!upscaleResponse.ok) throw new Error('Upscaling failed');
+
+    const upscaledBlob = await upscaleResponse.blob();
+    const upscaledUrl = URL.createObjectURL(upscaledBlob);
+
+    // Display the upscaled image
+    document.getElementById('imageContainer').innerHTML = 
+      `<img src="${upscaledUrl}" alt="Upscaled image">`;
+    
+    // Update history
+    const prompt = document.getElementById('promptInput').value.trim();
+    addToHistory(prompt + " (upscaled)", upscaledUrl);
+
+  } catch (error) {
+    console.error('Upscaling error:', error);
+    outputPlaceholder.innerHTML = `<p>Upscaling failed: ${error.message}</p>`;
+    return;
+  } finally {
+    outputPlaceholder.style.display = 'none';
+    document.getElementById('outputActions').style.display = 'flex';
+  }
 }
