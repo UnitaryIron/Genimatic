@@ -13,7 +13,6 @@
       content="AI art generator, AI image generation, text to image, AI art, generate images, art from text prompts, Genimatic"
     />
     <meta name="author" content="Genimatic Team" />
-
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -166,6 +165,16 @@
                     aria-label="Generate a random text prompt"
                   >
                     <i class="fa-solid fa-shuffle"></i> Random Prompt
+                  </button>
+
+                  <button
+                    class="btn small secondary"
+                    type="button"
+                    id="enhanceBtn"
+                    aria-label="Enhance the text prompt"
+                  >
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Enhance
+                    Prompt
                   </button>
                 </div>
               </div>
@@ -359,7 +368,7 @@
     </footer>
 
     <script src="script.js" defer></script>
-
+    <script src="promptEnhancer.js" defer></script>
     <style>
       .sr-only {
         position: absolute !important;
