@@ -98,7 +98,7 @@ https://image.pollinations.ai/prompt/a%20serene%20forest%20waterfall,%20anime
 
 ---
 
-## 📐Design & UI
+## Design & UI
 
 - **Responsive Layout:** Built with CSS Grid and Flexbox to adapt to mobile and desktop.
 - **Mobile-First Approach:** Optimized for touch controls, small screen navigation, and fast load.
@@ -107,7 +107,7 @@ https://image.pollinations.ai/prompt/a%20serene%20forest%20waterfall,%20anime
 
 ---
 
-## 💻 Technologies Used
+## Technologies Used
 
 - **HTML5** — Markup for UI structure.
 - **CSS3** — Styling, animations, and responsiveness.
@@ -117,7 +117,7 @@ https://image.pollinations.ai/prompt/a%20serene%20forest%20waterfall,%20anime
 
 ---
 
-## 🚀 Performance Notes
+## Performance Notes
 
 - All assets are optimized for fast loading.
 - No backend dependencies — runs entirely client-side.
@@ -126,15 +126,15 @@ https://image.pollinations.ai/prompt/a%20serene%20forest%20waterfall,%20anime
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 👤 Author
+## Author
 
-Developed by **[Your Name]** — Passionate about building AI-powered tools and creative applications.
+Developed by **Emmanuel Lijo** — Passionate about building AI-powered tools and creative applications.
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Genimatic-brightgreen)](https://genimatic.vercel.app/)
 
